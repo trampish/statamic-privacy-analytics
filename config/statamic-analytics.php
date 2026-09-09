@@ -60,13 +60,14 @@ return [
     |--------------------------------------------------------------------------
     |
     | The database connection used for every statamic_analytics_* table
-    | (page views, aggregates). Null falls back to the app's default
-    | connection. Set this when analytics data needs to live on its own
-    | connection regardless of what the app default is — e.g. a shared
-    | connection that must stay the same across every environment.
+    | (page views, aggregates), and their migrations. Defaults to 'site'
+    | so analytics data always lands on the same connection regardless
+    | of what the app's default connection is in a given environment —
+    | override with ANALYTICS_DB_CONNECTION (e.g. to 'sqlite' locally,
+    | so local dev traffic never writes into shared/production data).
     |
     */
-    'database_connection' => env('ANALYTICS_DB_CONNECTION'),
+    'database_connection' => env('ANALYTICS_DB_CONNECTION', 'site'),
 
     /*
     |--------------------------------------------------------------------------
